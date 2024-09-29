@@ -1,0 +1,30 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --White:           hsl(0,0,100);
+  --Purple:          hsl(282, 83, 52);
+  --Blue:            hsl(230, 76, 59);
+  --Very-Dark-Blue:  hsl(230, 31, 31);
+  --Dark-Blue:       hsl(231, 33, 34);
+  --Light-Blue:      hsl(224, 20, 49);
+  --Very-Light-Blue: hsl(231, 100, 97);
+  --Bluish-Grey:     hsl(230, 60, 98);
+  --Rose:            hsl(14, 83, 74);
+  --Cyan:            hsl(204, 94, 68);
+  
+  --background-primary: var(--Bluish-Grey);
+
+
+
+}

@@ -1,10 +1,16 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 
-  font-family: "Jost", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
+  height: 100dvh;
+  width:  100dvw;
+  
+  font-size: var(--Body-1-size);
+  font-weight: var(--Body-1-weight);
+  line-height: var(--Body-1-line);
+
+  background-color: var(--background-primary);
+  color: var(--Dark-Blue);
 }

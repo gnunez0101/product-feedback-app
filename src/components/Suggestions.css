@@ -1,0 +1,11 @@
+.suggestions {
+  padding-inline: 0;
+  padding-top: 0;
+}
+
+@media (width > 376px)  {
+  .suggestions {
+    padding-inline: 165px;
+    padding-top: 94px;  
+  } 
+}

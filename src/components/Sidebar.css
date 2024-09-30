@@ -1,0 +1,95 @@
+.sidebar {
+  display: flex;
+  .sidebar__header {
+    display: flex; 
+
+    .sidebar__header-text {
+      color: var(--White);
+
+    }
+  }
+
+  .sidebar__filters {
+
+  }
+
+  .sidebar__roadmap {
+    
+  }
+}
+
+@media (width > 376px) {
+  .sidebar {
+    flex-direction: column;
+    gap: 24px;
+    min-width: 255px;
+    max-width: 255px;
+
+    .sidebar__header {
+      align-items: flex-end;
+      height: 137px;
+      padding-inline: 24px;
+      padding-block: 24px;
+      border-radius: 10px;
+      background: url("../assets/suggestions/desktop/background-header.png");
+      
+      .sidebar__header-text {
+
+        .sidebar__header-text--title {
+          font-size:      var(--H2-size);
+          font-weight:    var(--H2-weight);
+          line-height:    var(--H2-line);
+          letter-spacing: var(--H2-space);
+        }
+
+        .sidebar__header-text--subtitle {
+          font-size:      var(--H4-size);
+          font-weight:    var(--H4-weight);
+          line-height:    var(--H4-line);
+          letter-spacing: var(--H4-space);
+          opacity: 0.75;
+        }
+      }
+    }
+
+    .sidebar__filters {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      column-gap: 8px;
+      row-gap: 14px;
+      padding: 24px;
+      border-radius: 10px;
+      background-color: var(--White);
+
+      .sidebar__filters_item {
+        background-color: var(--interactive-normal);
+        color: var(--text-terceary);
+        font-size:   var(--Body-3-size);
+        font-weight: var(--Body-3-weight);
+        line-height: var(--Body-3-line);
+        border-radius: 10px;
+        padding-inline: 16px;
+        padding-block: 6px;
+
+        &:hover {
+          background-color: var(--interactive-hover);
+          cursor: pointer;
+        }
+
+        &:active {
+          background-color: var(--interactive-active);
+          color: var(--White);
+        }
+      }
+    }
+
+    .sidebar__roadmap {
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      border-radius: 10px;
+      background-color: var(--White);
+    }
+  }
+}

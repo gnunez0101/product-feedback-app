@@ -30,6 +30,7 @@
   --Rose:            #F49F85;
   --Cyan:            #62BCFA;
   --Red:             #D73737;
+  --Sky:             #CFD7FF;
 
   --Purple-Hover:    #C75AF6;
   --Blue-Hover:      #7C91F9;
@@ -38,6 +39,12 @@
 
   /* Backgrounds */
   --background-primary: var(--Bluish-White);
+  --background-secondary: var(--Very-Light-Blue);
+
+  /* Text Colors */
+  --text-primary:   var(--Dark-Blue);
+  --text-secondary: var(--Light-Blue);
+  --text-terceary:  var(--Blue);
 
   /* Buttons */
   --button-1:           var(--Purple);
@@ -52,11 +59,16 @@
   --button-4:           var(--Red);
   --button-4-hover:     var(--Red-Hover);
 
+  /* Interactive Elements */
+  --interactive-normal: var(--Very-Light-Blue);
+  --interactive-hover:  var(--Sky);
+  --interactive-active: var(--Blue);
+
   /* Typography */
   --H1-weight: bold;
   --H2-weight: bold;
   --H3-weight: bold;
-  --H4-weight: bold;
+  --H4-weight: 500;
 
   --H1-size: 24px;
   --H2-size: 20px;
@@ -75,7 +87,7 @@
 
   --Body-1-weight: normal;
   --Body-2-weight: normal;
-  --Body-3-weight: 500;
+  --Body-3-weight: 600;
 
   --Body-1-size: 16px;
   --Body-2-size: 15px;
@@ -84,8 +96,4 @@
   --Body-1-line: 23px;
   --Body-2-line: 22px;
   --Body-3-line: 19px;
-}
-
-body {
-
 }

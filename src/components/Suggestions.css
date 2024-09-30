@@ -1,10 +1,15 @@
 .suggestions {
+  display: flex;
+  flex-direction: column;
   padding-inline: 0;
   padding-top: 0;
+
 }
 
 @media (width > 376px)  {
   .suggestions {
+    flex-direction: row;
+    column-gap: 30px;
     padding-inline: 165px;
     padding-top: 94px;  
   } 

@@ -38,8 +38,9 @@
   --Red-Hover:       #E98888;
 
   /* Backgrounds */
-  --background-primary: var(--Bluish-White);
+  --background-primary:   var(--Bluish-White);
   --background-secondary: var(--Very-Light-Blue);
+  --background-terceary:  var(--Very-Dark-Blue);
 
   /* Text Colors */
   --text-primary:   var(--Dark-Blue);

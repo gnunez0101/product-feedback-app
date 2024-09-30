@@ -1,6 +1,7 @@
 import './Sidebar.css'
 
 export default function() {
+  
   const filterItems = [
     "All",
     "UI",

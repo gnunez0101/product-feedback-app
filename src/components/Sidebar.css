@@ -98,16 +98,16 @@
         margin-bottom: 24px;
 
         .sidebar__roadmap-header--title {
-          font-size: var(--H3-size);
-          font-weight: var(--H3-weight);
-          line-height: var(--H3-line);
+          font-size:      var(--H3-size);
+          font-weight:    var(--H3-weight);
+          line-height:    var(--H3-line);
           letter-spacing: var(--H3-space);
         }
 
         .sidebar__roadmap-header--view {
-          font-size: var(--Body-3-size);
-          font-weight: var(--Body-3-weight);
-          line-height: var(--Body-3-line);
+          font-size:      var(--Body-3-size);
+          font-weight:    var(--Body-3-weight);
+          line-height:    var(--Body-3-line);
           letter-spacing: var(--Body-3-space);
         }
       }

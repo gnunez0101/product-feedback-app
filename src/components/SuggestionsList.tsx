@@ -39,6 +39,15 @@ export default function SuggestionsList() {
           </button>
         </div>
       </div>
+
+      <div className="suggestions-list__items">
+        <Suggestion />
+        <Suggestion />
+        <Suggestion />
+        <Suggestion />
+        <Suggestion />
+        <Suggestion />
+      </div>
     </div>
   )
 }
@@ -52,6 +61,28 @@ function SortMenuItems( {item} : {item: typeSortMenuItems} ) {
     <div className="menu-item">
       <div className="text" >{item.text}</div>
       <div className={`check ${item.selected ? "selected": ""}`}></div>
+    </div>
+  )
+}
+
+function Suggestion() {
+  return (
+    <div className="suggestion">
+      <div className="left">
+        <div className="votes">
+          <div className="icon">^</div>
+          <div className="num-votes">110</div>
+        </div>
+        <div className="contents">
+          <div className="title">Suggestion sample for testing purposes</div>
+          <div className="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium repellendus.</div>
+          <div className="category">Testing</div>
+        </div>
+      </div>
+      <div className="right">
+        <div className="icon">X</div>
+        <div className="comments">999</div>
+      </div>
     </div>
   )
 }

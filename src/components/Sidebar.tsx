@@ -11,6 +11,12 @@ export default function() {
     "Feature"
   ]
 
+  const roadmapItems = [
+    { color: "#F49F85", name: "Planned",     views: 2 },
+    { color: "#AD1FEA", name: "In-Progress", views: 3 },
+    { color: "#62BCFA", name: "Live",        views: 1 },
+  ]
+
   return (
     <div className="sidebar">
 
@@ -38,16 +44,34 @@ export default function() {
           <div className="sidebar__roadmap-header--title">
             Roadmap
           </div>
-          <div className="sidebar__roadmap-header--view">
+          <a className="sidebar__roadmap-header--view" href='#'>
             View
-          </div>
+          </a>
         </div>
         <div className="sidebar__roadmap-items">
-          Planned #
-          In-Progress #
-          Live #
+          { roadmapItems.map((item: typeRoadmapItem, index: number) => 
+            <RoadmapItem item={item} key={index} />)
+          }
         </div>
       </div>
+      
+    </div>
+  )
+}
+
+type typeRoadmapItem = {
+  color: string,
+  name:  string,
+  views: number
+}
+function RoadmapItem( {item}: {item: typeRoadmapItem} ) {
+  return (
+    <div className='sidebar__roadmap-item'>
+      <div className="name-group">
+        <span className="bullet" style={{ backgroundColor: item.color }}></span>
+        <span className="name">{item.name}</span>
+      </div>
+      <div className="views">{item.views}</div>
     </div>
   )
 }

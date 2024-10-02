@@ -1,15 +1,29 @@
+import { useEffect, useState } from 'react'
 import './SuggestionsList.css'
 
 export default function SuggestionsList() {
-
-  const suggestions = 6
-  const selected = "Most Upvotes"
-  const sortOptions = [
+  const [showSort, setShowSort] = useState(false)
+  const [selected, setSelected] = useState(0)
+  
+  const [sortOptions, setSortOptions] = useState([
     { text: "Most upvotes",   selected: true  },
     { text: "Least upvotes",  selected: false },
     { text: "Most comments",  selected: false },
     { text: "Least comments", selected: false },
-  ]
+  ])
+  const suggestions = 6
+
+  useEffect(() => {
+    let _options = sortOptions.map((option, index) => {
+      return { text: option.text, selected: index === selected }
+    })
+    setSortOptions(_options)
+  }, [selected])
+
+  function handleSort() {
+    setShowSort(!showSort)
+  }
+
   return (
     <div className="suggestions-list">
       <div className="suggestions-list__header">
@@ -19,15 +33,15 @@ export default function SuggestionsList() {
             {suggestions} Suggestions
           </div>
           <div className="suggestions-list__header--sort">
-            <div className='suggestions-list__header--sort-text'>
+            <div className='suggestions-list__header--sort-text'
+              onClick={handleSort}
+            >
               <div className="name">Sort by :</div>
-              <div className="selected">{selected}</div>
-              <div className="icon"></div>
-            </div>
-            <div className='suggestions-list__header--sort-list'>
-              { sortOptions.map((item, index) =>
-                <SortMenuItems item={item} key={index}/>
-              )}
+              <div className={`selected ${showSort ? "open" : ""}`}>{sortOptions[selected].text}</div>
+              <div className={`icon ${showSort ? "open" : ""}`}></div>
+              <div className='suggestions-list__header--sort-list'>
+                { showSort && <SortList options={sortOptions} setSelected={setSelected} /> }
+              </div>
             </div>
           </div>
         </div>
@@ -52,13 +66,32 @@ export default function SuggestionsList() {
   )
 }
 
+type typeOption = {
+  text: string,
+  selected: boolean
+}
+
+function SortList({options, setSelected}: {options: typeOption[], setSelected: any}) {
+  return (
+    <>
+      { options.map((item: typeOption, index: number) =>
+        <SortMenuItem item={item} index={index} 
+          handleClick={() => setSelected(index)} key={index}/>
+      )}
+    </>
+  )
+}
+
 type typeSortMenuItems = {
   text: string,
   selected: boolean
 }
-function SortMenuItems( {item} : {item: typeSortMenuItems} ) {
+function SortMenuItem( {item, index, handleClick} : {item: typeSortMenuItems, index:number, handleClick: any} ) {
+
   return (
-    <div className="menu-item">
+    <div className="menu-item"
+      onClick={() => handleClick(index)}
+    >
       <div className="text" >{item.text}</div>
       <div className={`check ${item.selected ? "selected": ""}`}></div>
     </div>
@@ -71,7 +104,7 @@ function Suggestion() {
       <div className="left">
         <div className="votes">
           <div className="icon">^</div>
-          <div className="num-votes">110</div>
+          <div className="num-votes">65</div>
         </div>
         <div className="contents">
           <div className="title">Suggestion sample for testing purposes</div>
@@ -80,8 +113,8 @@ function Suggestion() {
         </div>
       </div>
       <div className="right">
-        <div className="icon">X</div>
-        <div className="comments">999</div>
+        <div className="icon"></div>
+        <div className="comments">4</div>
       </div>
     </div>
   )

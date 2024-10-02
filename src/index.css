@@ -42,6 +42,7 @@
   --background-primary:   var(--Bluish-White);
   --background-secondary: var(--Very-Light-Blue);
   --background-terceary:  var(--Very-Dark-Blue);
+  --background-comments:  #CDD2EE;
 
   /* Text Colors */
   --text-primary:   var(--Dark-Blue);

@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
+import useDatabase from '../hooks/useDatabase'
 import './SuggestionsList.css'
 
 export default function SuggestionsList() {
   const [showSort, setShowSort] = useState(false)
   const [selected, setSelected] = useState(0)
+
+  const { database } = useDatabase()
   
   const [sortOptions, setSortOptions] = useState([
     { text: "Most upvotes",   selected: true  },

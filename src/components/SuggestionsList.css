@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    min-width: 825px;
+    max-width: 825px;
     max-width: 825px;
 
     .suggestions-list__header {
@@ -56,8 +56,13 @@
             letter-spacing: var(--Body-1-space);
             color: var(--Bluish-White);
 
-            &:hover {
+            &:hover:not(.cero) {
               cursor: pointer;
+            }
+
+            &.cero {
+              opacity: 0.50;
+              pointer-events: none;
             }
             
             .name {
@@ -153,9 +158,9 @@
           border: none;
           border-radius: 10px;
           background-color: var(--button-1);
-          font-size: var(--H4-size);
-          font-weight: var(--H1-weight);
-          line-height: var(--H4-line);
+          font-size:      var(--H4-size);
+          font-weight:    var(--H1-weight);
+          line-height:    var(--H4-line);
           letter-spacing: var(--H4-space);
 
           &:hover {
@@ -179,6 +184,14 @@
         padding-block: 28px;
         padding-inline: 32px;
         background-color: var(--White);
+
+        &:hover {
+          cursor: pointer;
+        }
+        
+        &:hover > .left > .contents > .title {
+          color: var(--text-terceary);
+        }
 
         .left {
           display: flex;
@@ -258,6 +271,7 @@
               margin-top: 12px;
               padding-inline: 16px;
               padding-block: 6px;
+              text-transform: capitalize;
       
               &:hover {
                 background-color: var(--interactive-hover);
@@ -269,10 +283,6 @@
                 color: var(--White);
               }
             }
-          }
-
-          &:hover .title{
-            color: var(--text-terceary);
           }
         }
 
@@ -295,6 +305,10 @@
             font-weight:    bold;
             line-height:    var(--Body-1-line);
             letter-spacing: var(--Body-1-space);
+
+            &.cero {
+              opacity: 0.4988;
+            }
           }
         }
       }

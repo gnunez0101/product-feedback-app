@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import useDatabase from '../hooks/useDatabase'
 import './SuggestionsList.css'
+import NoFeedback from './NoFeedback'
 
 export default function SuggestionsList() {
   const [showSort, setShowSort] = useState(false)
   const [selected, setSelected] = useState(0)
+  const [listItems, setListItems] = useState<typeProductRequest[]>()
 
   const { database } = useDatabase()
   
@@ -14,7 +16,14 @@ export default function SuggestionsList() {
     { text: "Most comments",  selected: false },
     { text: "Least comments", selected: false },
   ])
-  const suggestions = 6
+
+  const suggestions = listItems?.length
+
+  useEffect(() => {
+    const onlySuggestions = database.productRequests.filter((request) => 
+      request.status === "suggestion")
+    setListItems(onlySuggestions)
+  }, [])
 
   useEffect(() => {
     let _options = sortOptions.map((option, index) => {
@@ -36,12 +45,12 @@ export default function SuggestionsList() {
             {suggestions} Suggestions
           </div>
           <div className="suggestions-list__header--sort">
-            <div className='suggestions-list__header--sort-text'
+            <div className={`suggestions-list__header--sort-text ${suggestions ? "" : "cero"}`}
               onClick={handleSort}
             >
               <div className="name">Sort by :</div>
               <div className={`selected ${showSort ? "open" : ""}`}>{sortOptions[selected].text}</div>
-              <div className={`icon ${showSort ? "open" : ""}`}></div>
+              <div className={`icon ${showSort || !suggestions ? "open" : ""}`}></div>
               <div className='suggestions-list__header--sort-list'>
                 { showSort && <SortList options={sortOptions} setSelected={setSelected} /> }
               </div>
@@ -58,12 +67,10 @@ export default function SuggestionsList() {
       </div>
 
       <div className="suggestions-list__items">
-        <Suggestion />
-        <Suggestion />
-        <Suggestion />
-        <Suggestion />
-        <Suggestion />
-        <Suggestion />
+        { suggestions 
+          ? listItems?.map(item => <Suggestion key={item.id} item={item}/>) 
+          : <NoFeedback />
+        }
       </div>
     </div>
   )
@@ -75,6 +82,7 @@ type typeOption = {
 }
 
 function SortList({options, setSelected}: {options: typeOption[], setSelected: any}) {
+
   return (
     <>
       { options.map((item: typeOption, index: number) =>
@@ -89,6 +97,7 @@ type typeSortMenuItems = {
   text: string,
   selected: boolean
 }
+
 function SortMenuItem( {item, index, handleClick} : {item: typeSortMenuItems, index:number, handleClick: any} ) {
 
   return (
@@ -101,23 +110,24 @@ function SortMenuItem( {item, index, handleClick} : {item: typeSortMenuItems, in
   )
 }
 
-function Suggestion() {
+function Suggestion({item} : {item: typeProductRequest}) {
+  const numComments = item.comments?.length || 0
   return (
     <div className="suggestion">
       <div className="left">
         <div className="votes">
           <div className="icon">^</div>
-          <div className="num-votes">65</div>
+          <div className="num-votes">{item.upvotes}</div>
         </div>
         <div className="contents">
-          <div className="title">Suggestion sample for testing purposes</div>
-          <div className="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium repellendus.</div>
-          <div className="category">Testing</div>
+          <div className="title">{item.title}</div>
+          <div className="description">{item.description}</div>
+          <div className="category">{item.category}</div>
         </div>
       </div>
       <div className="right">
         <div className="icon"></div>
-        <div className="comments">4</div>
+        <div className={`comments ${numComments == 0 ? "cero" : ""}`}>{numComments}</div>
       </div>
     </div>
   )

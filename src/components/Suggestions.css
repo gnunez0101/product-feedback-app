@@ -11,6 +11,7 @@
     flex-direction: row;
     column-gap: 30px;
     padding-inline: 165px;
-    padding-top: 94px;  
+    padding-top: 94px;
+    padding-bottom: 130px;
   } 
 }

@@ -32,12 +32,39 @@ export default function SuggestionsList() {
     setSortOptions(_options)
   }, [selected])
 
-  function handleSort() {
+  function handleSortMenuOpen() {
     setShowSort(!showSort)
   }
 
+  function handleSortList(index: number) {
+    setSelected(index)
+    
+    if(!listItems) return
+    
+    switch(index) {
+      case 0: // Most upvotes:
+        listItems.sort((a, b) => b.upvotes - a.upvotes)
+        break
+
+      case 1: // Least upvotes:
+        listItems.sort((a, b) => a.upvotes - b.upvotes)
+        break
+
+      case 2: // Most comments:
+        listItems.sort((a, b) => (b.comments?.length || 0) - (a.comments?.length || 0))
+        break
+
+      case 3: // Least comments:
+        listItems.sort((a, b) => (a.comments?.length || 0) - (b.comments?.length || 0))
+        break
+
+      default:
+        console.log("Error on sorting option!")
+    }
+  }
+
   return (
-    <div className="suggestions-list">
+    <div className="suggestions-list"> 
       <div className="suggestions-list__header">
         <div className="suggestion-list__header--left">
           <div className="suggestion-list__header--logo"></div>
@@ -46,13 +73,13 @@ export default function SuggestionsList() {
           </div>
           <div className="suggestions-list__header--sort">
             <div className={`suggestions-list__header--sort-text ${suggestions ? "" : "cero"}`}
-              onClick={handleSort}
+              onClick={handleSortMenuOpen}
             >
               <div className="name">Sort by :</div>
               <div className={`selected ${showSort ? "open" : ""}`}>{sortOptions[selected].text}</div>
               <div className={`icon ${showSort || !suggestions ? "open" : ""}`}></div>
               <div className='suggestions-list__header--sort-list'>
-                { showSort && <SortList options={sortOptions} setSelected={setSelected} /> }
+                { showSort && <SortList options={sortOptions} handleSortList={handleSortList} /> }
               </div>
             </div>
           </div>
@@ -81,13 +108,12 @@ type typeOption = {
   selected: boolean
 }
 
-function SortList({options, setSelected}: {options: typeOption[], setSelected: any}) {
-
+function SortList({options, handleSortList}: {options: typeOption[], handleSortList: any}) {
   return (
     <>
       { options.map((item: typeOption, index: number) =>
         <SortMenuItem item={item} index={index} 
-          handleClick={() => setSelected(index)} key={index}/>
+          handleClick={() => handleSortList(index)} key={index}/>
       )}
     </>
   )
@@ -99,11 +125,8 @@ type typeSortMenuItems = {
 }
 
 function SortMenuItem( {item, index, handleClick} : {item: typeSortMenuItems, index:number, handleClick: any} ) {
-
   return (
-    <div className="menu-item"
-      onClick={() => handleClick(index)}
-    >
+    <div className="menu-item" onClick={() => handleClick(index)}>
       <div className="text" >{item.text}</div>
       <div className={`check ${item.selected ? "selected": ""}`}></div>
     </div>

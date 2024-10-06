@@ -1,38 +1,56 @@
 import { useEffect, useState } from 'react'
 import './Sidebar.css'
-import useDatabase from '../hooks/useDatabase'
 
-export default function() {
-  const { database } = useDatabase()
-  
-  const filterItems = [
-    "All",
-    "UI",
-    "UX",
-    "Enhancement",
-    "Bug",
-    "Feature"
-  ]
+export default function({listItems, setFilters} : {listItems: typeProductRequest[], setFilters: any}) {
+
+  const [filterItems, setFilterItems] = useState([
+    { label: "All",         selected: true  },
+    { label: "UI",          selected: false },
+    { label: "UX",          selected: false },
+    { label: "Enhancement", selected: false },
+    { label: "Bug",         selected: false },
+    { label: "Feature",     selected: false },
+  ])
 
   const [roadmapItems, setRoadmapItems] = useState([
-    { color: "#F49F85", value: "planned",     label: "Planned",     views: 0 },
-    { color: "#AD1FEA", value: "in-progress", label: "In-Progress", views: 0 },
-    { color: "#62BCFA", value: "live",        label: "Live",        views: 0 },
+    { color: "#F49F85", status: "planned",     label: "Planned",     views: 0 },
+    { color: "#AD1FEA", status: "in-progress", label: "In-Progress", views: 0 },
+    { color: "#62BCFA", status: "live",        label: "Live",        views: 0 },
   ])
 
   useEffect(() => {
     // Counting Elements for Roadmap Summary:
     let roadmapItemsCopy =  [...roadmapItems]
     roadmapItems.forEach( (rmItem, index) => 
-      roadmapItemsCopy[index].views = database.productRequests.filter((dbItem) => 
-        dbItem.status === rmItem.value).length
+      roadmapItemsCopy[index].views = listItems.filter((dbItem) => 
+        dbItem.status === rmItem.status).length
     )
     setRoadmapItems(roadmapItemsCopy)
   }, [])
 
+  function handleFilters(index: number) {
+    let items = [...filterItems]
+    items[index].selected = !filterItems[index].selected
+    if (index === 0) {
+      items.forEach(item => {
+        item.selected = false
+      })
+      items[0].selected = true
+    }
+    else {
+      (items[0].selected = false)
+      let count = 0
+      items.forEach(item => {
+        count+= (item.selected == true ? 1 : 0)
+      })
+      if(count == 0) items[0].selected = true
+    }
+    setFilterItems(items)
+  }
+
   return (
     <div className="sidebar">
-
+      {/* --------------------------------------------------------- */}
       <div className="sidebar__header">
         <div className="sidebar__header-text">
           <div className="sidebar__header-text--title">
@@ -43,13 +61,16 @@ export default function() {
           </div>
         </div>
       </div>
-
+      {/* --------------------------------------------------------- */}
       <div className="sidebar__filters">
         {filterItems.map((item, index) => 
-          <div className="sidebar__filters_item" key={index}>{item}</div>
+          <div key={index} 
+            className={`sidebar__filters_item ${item.selected ? "selected" : ""}`}
+            onClick={() => handleFilters(index)}
+          >{item.label}</div>
         )}
       </div>
-
+      {/* --------------------------------------------------------- */}
       <div className="sidebar__roadmap">
         <div className="sidebar__roadmap-header">
           <div className="sidebar__roadmap-header--title">Roadmap</div>
@@ -61,14 +82,14 @@ export default function() {
           }
         </div>
       </div>
-      
+      {/* --------------------------------------------------------- */}
     </div>
   )
 }
 
 type typeRoadmapItem = {
   color: string,
-  value: string,
+  status: string,
   label: string,
   views: number
 }

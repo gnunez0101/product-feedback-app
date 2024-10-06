@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react'
-import useDatabase from '../hooks/useDatabase'
 import './SuggestionsList.css'
 import NoFeedback from './NoFeedback'
 
-export default function SuggestionsList() {
+export default function SuggestionsList({listItems, filters} : {listItems: typeProductRequest[], filters: string}) {
   const [showSort, setShowSort] = useState(false)
   const [selected, setSelected] = useState(0)
-  const [listItems, setListItems] = useState<typeProductRequest[]>()
-
-  const { database } = useDatabase()
   
   const [sortOptions, setSortOptions] = useState([
     { text: "Most upvotes",   selected: true  },
@@ -17,13 +13,10 @@ export default function SuggestionsList() {
     { text: "Least comments", selected: false },
   ])
 
-  const suggestions = listItems?.length
+  const numSuggestions = listItems?.length
 
-  useEffect(() => {
-    const onlySuggestions = database.productRequests.filter((request) => 
-      request.status === "suggestion")
-    setListItems(onlySuggestions)
-  }, [])
+  // useEffect(() => {
+  // }, [])
 
   useEffect(() => {
     let _options = sortOptions.map((option, index) => {
@@ -32,14 +25,10 @@ export default function SuggestionsList() {
     setSortOptions(_options)
   }, [selected])
 
-  function handleSortMenuOpen() {
-    setShowSort(!showSort)
-  }
-
   function handleSortList(index: number) {
     setSelected(index)
     
-    if(!listItems) return
+    if (!listItems) return
     
     switch(index) {
       case 0: // Most upvotes:
@@ -69,15 +58,15 @@ export default function SuggestionsList() {
         <div className="suggestion-list__header--left">
           <div className="suggestion-list__header--logo"></div>
           <div className="suggestion-list__header--quantity">
-            {suggestions} Suggestions
+            {numSuggestions} Suggestions
           </div>
           <div className="suggestions-list__header--sort">
-            <div className={`suggestions-list__header--sort-text ${suggestions ? "" : "cero"}`}
-              onClick={handleSortMenuOpen}
+            <div className={`suggestions-list__header--sort-text ${numSuggestions ? "" : "cero"}`}
+              onClick={() => setShowSort(!showSort)}
             >
               <div className="name">Sort by :</div>
               <div className={`selected ${showSort ? "open" : ""}`}>{sortOptions[selected].text}</div>
-              <div className={`icon ${showSort || !suggestions ? "open" : ""}`}></div>
+              <div className={`icon ${showSort || !numSuggestions ? "open" : ""}`}></div>
               <div className='suggestions-list__header--sort-list'>
                 { showSort && <SortList options={sortOptions} handleSortList={handleSortList} /> }
               </div>
@@ -94,7 +83,7 @@ export default function SuggestionsList() {
       </div>
 
       <div className="suggestions-list__items">
-        { suggestions 
+        { numSuggestions 
           ? listItems?.map(item => <Suggestion key={item.id} item={item}/>) 
           : <NoFeedback />
         }

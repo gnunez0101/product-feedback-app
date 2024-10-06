@@ -81,6 +81,11 @@
           background-color: var(--interactive-active);
           color: var(--White);
         }
+
+        &.selected {
+          background-color: var(--interactive-active);
+          color: var(--White);
+        }
       }
     }
 

@@ -68,9 +68,9 @@
         font-size:   var(--Body-3-size);
         font-weight: var(--Body-3-weight);
         line-height: var(--Body-3-line);
-        border-radius: 10px;
+        border-radius:  10px;
         padding-inline: 16px;
-        padding-block: 6px;
+        padding-block:   6px;
 
         &:hover {
           background-color: var(--interactive-hover);

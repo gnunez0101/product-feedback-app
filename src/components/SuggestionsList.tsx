@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import './SuggestionsList.css'
 import NoFeedback from './NoFeedback'
+import useDatabase from '../hooks/useDatabase'
 
-export default function SuggestionsList({listItems, filters} : {listItems: typeProductRequest[], filters: string}) {
+export default function SuggestionsList({listItems} : {listItems: typeListItems[]}) {
   const [showSort, setShowSort] = useState(false)
   const [selected, setSelected] = useState(0)
+  const { dispatch } = useDatabase()
   
   const [sortOptions, setSortOptions] = useState([
     { text: "Most upvotes",   selected: true  },
@@ -14,9 +16,6 @@ export default function SuggestionsList({listItems, filters} : {listItems: typeP
   ])
 
   const numSuggestions = listItems?.length
-
-  // useEffect(() => {
-  // }, [])
 
   useEffect(() => {
     let _options = sortOptions.map((option, index) => {
@@ -52,6 +51,10 @@ export default function SuggestionsList({listItems, filters} : {listItems: typeP
     }
   }
 
+  function handleUpvotes(id: number) {
+    dispatch({ type: "upvote", id: id})
+  }
+
   return (
     <div className="suggestions-list"> 
       <div className="suggestions-list__header">
@@ -84,7 +87,7 @@ export default function SuggestionsList({listItems, filters} : {listItems: typeP
 
       <div className="suggestions-list__items">
         { numSuggestions 
-          ? listItems?.map(item => <Suggestion key={item.id} item={item}/>) 
+          ? listItems?.map(item => <Suggestion key={item.id} item={item} handleUpvotes={handleUpvotes} />)
           : <NoFeedback />
         }
       </div>
@@ -122,25 +125,39 @@ function SortMenuItem( {item, index, handleClick} : {item: typeSortMenuItems, in
   )
 }
 
-function Suggestion({item} : {item: typeProductRequest}) {
+function Suggestion({item, handleUpvotes} : {item: typeListItems, handleUpvotes: any}) {
+  const [upvotes, setUpvotes] = useState(item.upvotes)
   const numComments = item.comments?.length || 0
+
+  function handleVotes(votes:number) {
+    setUpvotes(votes + 1)
+  }
   return (
-    <div className="suggestion">
-      <div className="left">
-        <div className="votes">
-          <div className="icon">^</div>
-          <div className="num-votes">{item.upvotes}</div>
+    <>
+      { item.show &&
+      <div className="suggestion">
+        <div className="left">
+          <div className="votes" 
+            onClick={() => {
+              handleUpvotes(item.id)
+              handleVotes(upvotes)
+            }}
+          >
+            <div className="icon">^</div>
+            <div className="num-votes">{upvotes}</div>
+          </div>
+          <div className="contents">
+            <div className="title">{item.title}</div>
+            <div className="description">{item.description}</div>
+            <div className="category">{item.category}</div>
+          </div>
         </div>
-        <div className="contents">
-          <div className="title">{item.title}</div>
-          <div className="description">{item.description}</div>
-          <div className="category">{item.category}</div>
+        <div className="right">
+          <div className="icon"></div>
+          <div className={`comments ${numComments == 0 ? "cero" : ""}`}>{numComments}</div>
         </div>
       </div>
-      <div className="right">
-        <div className="icon"></div>
-        <div className={`comments ${numComments == 0 ? "cero" : ""}`}>{numComments}</div>
-      </div>
-    </div>
+      }
+    </>
   )
 }

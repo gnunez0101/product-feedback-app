@@ -4,39 +4,34 @@ import SuggestionsList from "./SuggestionsList";
 import useDatabase from '../hooks/useDatabase';
 import { useEffect, useState } from 'react';
 
-
-type typeShowItem = { show: boolean }
-type typeListItems = typeProductRequest & typeShowItem
-
 export default function Suggestions() {
-  const [listItems, setListItems] = useState<typeListItems[]>()
-  const [filters, setFilters] = useState("")
+  const [listSuggestions, setListSuggestions] = useState<typeListItems[]>()
+  const [filter, setFilter] = useState("")
   const { database } = useDatabase()
 
   useEffect(() => {
-    let onlySuggestions = database.productRequests.filter((request) => 
-      request.status === "suggestion")
+    let onlySuggestions = database.productRequests.filter((request) => request.status === "suggestion")
     let onlySuggestionsNew: typeListItems[] = []
-    onlySuggestions.forEach((item, index) => {
-       onlySuggestionsNew[index] = {...item, show: true}
-    })
-    setListItems(onlySuggestionsNew)
+    onlySuggestions.forEach((item, index) => {onlySuggestionsNew[index] = {...item, show: true}})
+    setListSuggestions(onlySuggestionsNew)
   }, [])
   
   useEffect(() => {
-
-  }, [filters])
+    if (listSuggestions) {
+      let listCopy = [...listSuggestions!]
+      listCopy.forEach(item => item.show = item.category === filter || filter === "all")
+      setListSuggestions(listCopy)
+    }
+  }, [filter])
 
   return (
-    <>
-      <div className = "suggestions">
-        { listItems &&
-          <>
-            <Sidebar         listItems={database.productRequests} setFilters={setFilters}/>
-            <SuggestionsList listItems={listItems} filters='' />
-          </>
-        }
-      </div>
-    </>
+    <div className = "suggestions">
+      { listSuggestions &&
+        <>
+          <Sidebar         listItems={database.productRequests} setFilter={setFilter}/>
+          <SuggestionsList listItems={listSuggestions} />
+        </>
+      }
+    </div>
   )
 }

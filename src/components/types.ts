@@ -13,10 +13,6 @@ type typeValueDialogs = {
   dialogLaunch: (dialog: string, board?: number, column?: number, task?: number, callBack?: (param: any) => void) => void,
   dialogsData?:  typeDialogs,
   setDialogsData: ([]: typeDialogs) => void,
-  currentBoard: number | null,
-  setCurrentBoard: (board: number | null) => void,
-  subtaskChange: boolean,
-  setSubTaskChange: (isOpen: boolean) => void
 }
 
 type typeData = {
@@ -55,6 +51,9 @@ type typeReply = {
   user:       typeUser
 }
 
+type typeShowItem = { show: boolean }
+type typeListItems = typeProductRequest & typeShowItem
+
 type typeDialogs = [
   dialog: string,
   productRequests:  number | undefined,
@@ -64,8 +63,8 @@ type typeDialogs = [
 ] | undefined
 
 type typeAction = {
-  type: 'read',
-  values: typeData
+  type: 'upvote',
+  id: number
 }
 
 // ==================================================================================================================

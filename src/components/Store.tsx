@@ -8,8 +8,6 @@ export const ContextDialogs  = createContext<typeValueDialogs | undefined>(undef
 export const StoreProvider = ( props: StoreProps ) => {
   // const data = { boards: [] }
   const [dialogsData, setDialogsData]   = useState<typeDialogs | undefined>(undefined)
-  const [currentBoard, setCurrentBoard] = useState<number | null>(null)
-  const [dialogOpen, setDialogOpen]     = useState(false)
 
   // ------------------------------------------------------------------------------------
   const [database, dispatch] = useImmerReducer(dataReducer, data, loadData)
@@ -32,10 +30,6 @@ export const StoreProvider = ( props: StoreProps ) => {
     dialogLaunch:     launchDialog,
     dialogsData:      dialogsData,
     setDialogsData:   setDialogsData,
-    currentBoard:     currentBoard,
-    setCurrentBoard:  setCurrentBoard,
-    subtaskChange:    dialogOpen,
-    setSubTaskChange: setDialogOpen
   }
   
   function launchDialog( dialog: string, board?: number, column?: number, task?: number, callBack?: (param: any) => void ) {
@@ -55,13 +49,14 @@ export const StoreProvider = ( props: StoreProps ) => {
 }
 
 // ===============================================================================================================================
-function dataReducer(_data: typeData, action: typeAction): typeData {
+function dataReducer(draft: typeData, action: typeAction): typeData {
 
   switch (action.type) {
     
-    case 'read' : {
-
-      return _data
+    case 'upvote' : {
+      const index = draft.productRequests.findIndex(item => item.id === action.id)
+      draft.productRequests[index].upvotes++
+      return draft
     }
 
     default: {

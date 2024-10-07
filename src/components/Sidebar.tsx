@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './Sidebar.css'
 
-export default function({listItems, setFilters} : {listItems: typeProductRequest[], setFilters: any}) {
+export default function({listItems, setFilter}: {listItems: typeProductRequest[], setFilter: any}) {
 
   const [filterItems, setFilterItems] = useState([
     { label: "All",         selected: true  },
@@ -29,23 +29,11 @@ export default function({listItems, setFilters} : {listItems: typeProductRequest
   }, [])
 
   function handleFilters(index: number) {
-    let items = [...filterItems]
-    items[index].selected = !filterItems[index].selected
-    if (index === 0) {
-      items.forEach(item => {
-        item.selected = false
-      })
-      items[0].selected = true
-    }
-    else {
-      (items[0].selected = false)
-      let count = 0
-      items.forEach(item => {
-        count+= (item.selected == true ? 1 : 0)
-      })
-      if(count == 0) items[0].selected = true
-    }
-    setFilterItems(items)
+    let items = [...filterItems]    // Make copy of filters
+    items.forEach(item => item.selected = false)  // Deselect all
+    items[index].selected = true    // Select and highlight clicked filter
+    setFilter(filterItems[index].label.toLowerCase())  // Return filter text
+    setFilterItems(items)   // Update filter items
   }
 
   return (

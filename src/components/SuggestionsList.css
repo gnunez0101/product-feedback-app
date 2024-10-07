@@ -272,16 +272,6 @@
               padding-inline: 16px;
               padding-block: 6px;
               text-transform: capitalize;
-      
-              &:hover {
-                background-color: var(--interactive-hover);
-                cursor: pointer;
-              }
-      
-              &:active {
-                background-color: var(--interactive-active);
-                color: var(--White);
-              }
             }
           }
         }

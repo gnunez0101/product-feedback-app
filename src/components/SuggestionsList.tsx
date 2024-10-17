@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
 import './SuggestionsList.css'
+import { useEffect, useState } from 'react'
 import NoFeedback from './NoFeedback'
+import FeedbackDetail from './FeedbackDetail'
 import useDatabase from '../hooks/useDatabase'
+import { useNavigate } from 'react-router-dom'
 
 export default function SuggestionsList({listItems} : {listItems: typeListItems[]}) {
   const [showSort, setShowSort] = useState(false)
@@ -128,19 +130,19 @@ function SortMenuItem( {item, index, handleClick} : {item: typeSortMenuItems, in
 function Suggestion({item, handleUpvotes} : {item: typeListItems, handleUpvotes: any}) {
   const [upvotes, setUpvotes] = useState(item.upvotes)
   const numComments = item.comments?.length || 0
+  const navigate = useNavigate()
 
-  function handleVotes(votes:number) {
-    setUpvotes(votes + 1)
-  }
   return (
     <>
       { item.show &&
-      <div className="suggestion">
+      <div className="suggestion"
+        onClick={() => navigate(`/feedback-detail/${item.id}`)}
+      >
         <div className="left">
           <div className="votes" 
             onClick={() => {
               handleUpvotes(item.id)
-              handleVotes(upvotes)
+              setUpvotes(upvotes + 1)
             }}
           >
             <div className="icon">^</div>

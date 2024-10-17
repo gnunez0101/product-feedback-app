@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './Sidebar.css'
+import { Link } from 'react-router-dom'
 
 export default function({listItems, setFilter}: {listItems: typeProductRequest[], setFilter: any}) {
 
@@ -62,7 +63,7 @@ export default function({listItems, setFilter}: {listItems: typeProductRequest[]
       <div className="sidebar__roadmap">
         <div className="sidebar__roadmap-header">
           <div className="sidebar__roadmap-header--title">Roadmap</div>
-          <a className="sidebar__roadmap-header--view" href='#'>View</a>
+          <Link to={'/roadmap'} className="sidebar__roadmap-header--view">View</Link>
         </div>
         <div className="sidebar__roadmap-items">
           { roadmapItems.map((item: typeRoadmapItem, index: number) => 

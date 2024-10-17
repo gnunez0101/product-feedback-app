@@ -5,9 +5,10 @@ import data from '../data.json'
 
 export const ContextDatabase = createContext<typeValueData    | undefined>(undefined)
 export const ContextDialogs  = createContext<typeValueDialogs | undefined>(undefined)
+
 export const StoreProvider = ( props: StoreProps ) => {
   // const data = { boards: [] }
-  const [dialogsData, setDialogsData]   = useState<typeDialogs | undefined>(undefined)
+  const [dialogsData, setDialogsData] = useState<typeDialogs | undefined>(undefined)
 
   // ------------------------------------------------------------------------------------
   const [database, dispatch] = useImmerReducer(dataReducer, data, loadData)
@@ -56,6 +57,7 @@ function dataReducer(draft: typeData, action: typeAction): typeData {
     case 'upvote' : {
       const index = draft.productRequests.findIndex(item => item.id === action.id)
       draft.productRequests[index].upvotes++
+      localStorage.setItem("pfb_data", JSON.stringify(draft))
       return draft
     }
 

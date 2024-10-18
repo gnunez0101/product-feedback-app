@@ -32,7 +32,7 @@
       font-size:      var(--H1-size);
       font-weight:    var(--H1-weight);
       line-height:    var(--H1-line);
-      letter-spacing: var(--H1-space);
+      letter-spacing: var(--H1-spacing);
     }
 
     .no-feedback__contents {
@@ -41,7 +41,7 @@
       font-size:      var(--Body-1-size);
       font-weight:    var(--Body-1-weight);
       line-height:    var(--Body-1-line);
-      letter-spacing: var(--Body-1-space);
+      letter-spacing: var(--Body-1-spacing);
     }
 
     .no-feedback__add {
@@ -53,7 +53,7 @@
       font-size:      var(--H4-size);
       font-weight:    var(--H1-weight);
       line-height:    var(--H4-line);
-      letter-spacing: var(--H4-space);
+      letter-spacing: var(--H4-spacing);
 
       &:hover {
         background-color: var(--button-1-hover);

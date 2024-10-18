@@ -52,6 +52,7 @@ type typeReply = {
 }
 
 type typeShowItem = { show: boolean }
+
 type typeListItems = typeProductRequest & typeShowItem
 
 type typeDialogs = [

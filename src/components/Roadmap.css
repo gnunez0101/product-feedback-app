@@ -43,7 +43,7 @@
             font-size:      var(--H4-size);
             font-weight:    var(--H4-weight);
             line-height:    var(--H4-line);
-            letter-spacing: var(--H4-space);
+            letter-spacing: var(--H4-spacingng);
           }
         }
   
@@ -51,7 +51,7 @@
           font-size:      var(--H1-size);
           font-weight:    var(--H1-weight);
           line-height:    var(--H1-line);
-          letter-spacing: var(--H1-space);
+          letter-spacing: var(--H1-spacingng);
         }
       }
   
@@ -66,7 +66,7 @@
           font-size:      var(--H4-size);
           font-weight:    var(--H1-weight);
           line-height:    var(--H4-line);
-          letter-spacing: var(--H4-space);
+          letter-spacing: var(--H4-spacingng);
   
           &:hover {
             background-color: var(--button-1-hover);
@@ -90,7 +90,7 @@
           font-size:      var(--H3-size);
           font-weight:    var(--H3-weight);
           line-height:    var(--H3-line);
-          letter-spacing: var(--H3-space);
+          letter-spacing: var(--H3-spacingng);
         }
 
         .text {
@@ -98,7 +98,7 @@
           font-size:      var(--Body-1-size);
           font-weight:    var(--Body-1-weight);
           line-height:    var(--Body-1-line);
-          letter-spacing: var(--Body-1-space);
+          letter-spacing: var(--Body-1-spacingng);
           color: var(--text-secondary);
         }
 
@@ -139,7 +139,7 @@
                 font-size:      var(--Body-1-size);
                 font-weight:    var(--Body-1-weight);
                 line-height:    var(--Body-1-line);
-                letter-spacing: var(--Body-1-space);
+                letter-spacing: var(--Body-1-spacingng);
                 color: var(--text-secondary);
               }
             }
@@ -152,7 +152,7 @@
               font-size:      var(--Body-1-size);
               font-weight:    var(--Body-1-weight);
               line-height:    var(--Body-1-line);
-              letter-spacing: var(--Body-1-space);
+              letter-spacing: var(--Body-1-spacingng);
               color: var(--text-secondary);
               margin-bottom: 16px;
             }
@@ -163,7 +163,7 @@
               font-size:      var(--Body-3-size);
               font-weight:    var(--Body-3-weight);
               line-height:    var(--Body-3-line);
-              letter-spacing: var(--Body-3-space);
+              letter-spacing: var(--Body-3-spacingng);
               color: var(--text-terceary);
               text-transform: capitalize;
               border-radius: 10px;
@@ -197,7 +197,7 @@
                   font-size:      var(--Body-3-size);
                   font-weight:    bold;
                   line-height:    var(--Body-3-line);
-                  letter-spacing: var(--Body-3-space);
+                  letter-spacing: var(--Body-3-spacingng);
                   color: var(--text-primary);
                 }
 
@@ -236,7 +236,7 @@
                   font-size:      var(--Body-1-size);
                   font-weight:    bold;
                   line-height:    var(--Body-1-line);
-                  letter-spacing: var(--Body-1-space);
+                  letter-spacing: var(--Body-1-spacingng);
                   color: var(--text-primary);
                 }
               }

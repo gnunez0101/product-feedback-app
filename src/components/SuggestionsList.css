@@ -40,7 +40,7 @@
           font-size:      var(--H3-size);
           font-weight:    var(--H3-weight);
           line-height:    var(--H3-line);
-          letter-spacing: var(--H3-space);
+          letter-spacing: var(--H3-spacing);
         }
 
         .suggestions-list__header--sort {
@@ -53,8 +53,8 @@
             font-size:      var(--Body-1-size);
             font-weight:    var(--Body-1-weight);
             line-height:    var(--Body-1-line);
-            letter-spacing: var(--Body-1-space);
-            color: var(--Bluish-White);
+            letter-spacing: var(--Body-1-spacing);
+            color: var(--background-primary);
 
             &:hover:not(.cero) {
               cursor: pointer;
@@ -123,7 +123,7 @@
                   font-size:      var(--Body-1-size);
                   font-weight:    var(--Body-1-weight);
                   line-height:    var(--Body-1-line);
-                  letter-spacing: var(--Body-1-space);
+                  letter-spacing: var(--Body-1-spacing);
                 }
   
                 .check {
@@ -152,6 +152,7 @@
       }
 
       .suggestions-list__header--right {
+
         .suggestions-list__header--add-feedback {
           width: 158px;
           height: 44px;
@@ -161,7 +162,7 @@
           font-size:      var(--H4-size);
           font-weight:    var(--H1-weight);
           line-height:    var(--H4-line);
-          letter-spacing: var(--H4-space);
+          letter-spacing: var(--H4-spacing);
 
           &:hover {
             background-color: var(--button-1-hover);
@@ -171,7 +172,7 @@
       }
     }
 
-    .suggestions-list__items {
+    .suggestions-list__items, .feedback__item {
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -247,7 +248,7 @@
               font-size:      var(--H3-size);
               font-weight:    var(--H3-weight);
               line-height:    var(--H3-line);
-              letter-spacing: var(--H3-space);
+              letter-spacing: var(--H3-spacing);
               color: var(--text-primary);
             }
 
@@ -255,7 +256,7 @@
               font-size:      var(--Body-1-size);
               font-weight:    var(--Body-1-weight);
               line-height:    var(--Body-1-line);
-              letter-spacing: var(--Body-1-space);
+              letter-spacing: var(--Body-1-spacing);
               margin-top: 4px;
               color: var(--text-secondary);
             }
@@ -294,7 +295,7 @@
             font-size:      var(--Body-1-size);
             font-weight:    bold;
             line-height:    var(--Body-1-line);
-            letter-spacing: var(--Body-1-space);
+            letter-spacing: var(--Body-1-spacing);
 
             &.cero {
               opacity: 0.4988;

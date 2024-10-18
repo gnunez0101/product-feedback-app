@@ -1,0 +1,71 @@
+.comment {
+  display: flex;
+  flex-direction: column;
+  
+  .comment__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--White);
+    padding-block: 32px;
+
+    .comment__photo {
+      width: 72px;
+
+      & img {
+        width:  40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+    }
+
+    .comment__content {
+      flex: 1;
+
+      .comment__content--top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 17px;
+
+        .comment__content--top-left {
+          font-size:      var(--H4-size);
+          font-weight:    var(--H4-weight);
+          line-height:    var(--H4-line);
+          letter-spacing: var(--H4-spacing);
+
+          .comment__content--name {
+            color: var(--text-primary);
+          }
+
+          .comment__content--username {
+            font-weight: normal;
+          }
+        }
+
+        .comment__content--reply {
+          color: var(--text-terceary);
+          font-size:      var(--Body-3-size);
+          font-weight:    var(--Body-3-weight);
+          line-height:    var(--Body-3-line);
+          letter-spacing: var(--Body-3-spacing);
+        }
+      }
+
+      .comment__content--content {
+        color: var(--text-secondary);
+        font-size:      var(--Body-2-size);
+        font-weight:    var(--Body-2-weight);
+        line-height:    var(--Body-2-line);
+        letter-spacing: var(--Body-2-spacing);
+      }
+    }
+  }
+
+  .comment__replies {
+    background-color: var(--White);
+    padding-left: 45px;
+  }
+}

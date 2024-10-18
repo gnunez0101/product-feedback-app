@@ -1,0 +1,71 @@
+.reply {
+  display: flex;
+  flex-direction: column;
+  
+  .reply__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-block: 32px;
+
+    .reply__photo {
+      width: 72px;
+
+      & img {
+        width:  40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+    }
+
+    .reply__content {
+      flex: 1;
+
+      .reply__content--top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 17px;
+
+        .reply__content--top-left {
+          font-size:      var(--H4-size);
+          font-weight:    var(--H4-weight);
+          line-height:    var(--H4-line);
+          letter-spacing: var(--H4-spacing);
+
+          .reply__content--name {
+            color: var(--text-primary);
+          }
+
+          .reply__content--username {
+            font-weight: normal;
+          }
+        }
+
+        .reply__content--reply {
+          color: var(--text-terceary);
+          font-size:      var(--Body-3-size);
+          font-weight:    var(--Body-3-weight);
+          line-height:    var(--Body-3-line);
+          letter-spacing: var(--Body-3-spacing);
+        }
+      }
+
+      .reply__content--content {
+        color: var(--text-secondary);
+        font-size:      var(--Body-2-size);
+        font-weight:    var(--Body-2-weight);
+        line-height:    var(--Body-2-line);
+        letter-spacing: var(--Body-2-spacing);
+
+        .replyingto {
+          color: var(--text-replyingto);
+          font-weight: bold;
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+}

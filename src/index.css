@@ -2,28 +2,28 @@
   box-sizing: border-box;
   margin:  0;
   padding: 0;
+
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 :root {
   color-scheme: light dark;
 
-  font-family: "Jost", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
   /* Colors */
   --Purple:          #AD1FEA;
+  --Light-Purple:    #8C92B3;
   --Blue:            #4661E6;
   --Very-Dark-Blue:  #373F68;
   --White:           #FFFFFF;
 
   --Very-Light-Blue: #F2F4FF;
-  --Bluish-White:    #F7F8FD;
+  --Bluish-White-1:  #F7F8FD;
   --Dark-Blue:       #3A4374;
   --Light-Blue:      #647196;
 
@@ -31,7 +31,7 @@
   --Cyan:            #62BCFA;
   --Red:             #D73737;
   --Sky:             #CFD7FF;
-  --Bluish-White:    #F2F4FE;
+  --Bluish-White-2:  #F2F4FE;
 
   --Purple-Hover:    #C75AF6;
   --Blue-Hover:      #7C91F9;
@@ -39,15 +39,16 @@
   --Red-Hover:       #E98888;
 
   /* Backgrounds */
-  --background-primary:   var(--Bluish-White);
+  --background-primary:   var(--Bluish-White-1);
   --background-secondary: var(--Very-Light-Blue);
   --background-terceary:  var(--Very-Dark-Blue);
   --background-comments:  #CDD2EE;
 
   /* Text Colors */
-  --text-primary:   var(--Dark-Blue);
-  --text-secondary: var(--Light-Blue);
-  --text-terceary:  var(--Blue);
+  --text-primary:    var(--Dark-Blue);
+  --text-secondary:  var(--Light-Blue);
+  --text-terceary:   var(--Blue);
+  --text-replyingto: var(--Purple);
 
   /* Buttons */
   --button-1:           var(--Purple);
@@ -71,7 +72,7 @@
   --H1-weight: bold;
   --H2-weight: bold;
   --H3-weight: bold;
-  --H4-weight: 500;
+  --H4-weight: 700;
 
   --H1-size: 24px;
   --H2-size: 20px;

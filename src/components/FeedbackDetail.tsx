@@ -2,7 +2,7 @@ import './FeedbackDetail.css'
 import { useParams }  from "react-router-dom"
 import SuggestionItem from "./SuggestionItem"
 import useDatabase    from "../hooks/useDatabase"
-import { Comment }    from './Comment'
+import Comment from './Comment'
 
 export default function FeedbackDetail() {
   const { database, dispatch } = useDatabase()

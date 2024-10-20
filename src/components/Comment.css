@@ -65,7 +65,18 @@
   }
 
   .comment__replies {
+    position: relative;
     background-color: var(--White);
     padding-left: 45px;
+
+    .replies-line {
+      position: absolute;
+      width: 1px;
+      background-color: var(--Light-Blue);
+      top: -32px;
+      left: 20px;
+      bottom: 0;
+      opacity: 0.1;
+    }
   }
 }

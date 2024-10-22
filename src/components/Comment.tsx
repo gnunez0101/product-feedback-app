@@ -4,6 +4,7 @@ import Reply from './Reply';
 
 export default function Comment({ comment }: { comment: typeComment; }) {
   const contentRef = useRef<HTMLDivElement>(null)
+  const [showReply, setShowReply] = useState(false)
   const [heightTop, setHeightTop] = useState(0)
   const [heightBottom, setHeightBottom] = useState(0)
 
@@ -12,9 +13,11 @@ export default function Comment({ comment }: { comment: typeComment; }) {
       setHeightTop(-1 * contentRef.current.getBoundingClientRect().height - 32 + 6)
     }
   }, [])
- 
-  console.log(heightTop, heightBottom)
 
+  function handleReply() {
+    setShowReply(!showReply)
+  }
+ 
   return (
     <div className="comment">
       <div className="comment__body">
@@ -31,11 +34,19 @@ export default function Comment({ comment }: { comment: typeComment; }) {
                 {`@${comment.user.username}`}
               </div>
             </div>
-            <div className="comment__content--reply">Reply</div>
+            <div className="comment__content--reply"
+              onClick={handleReply}
+            >Reply</div>
           </div>
           <div className="comment__content--content" ref={contentRef}>
             {comment.content}
           </div>
+          <form className={`comment__content--content-post ${showReply ? "show" : ""}`}>
+            <textarea className="content-input"
+              placeholder='Type your reply here'
+            />
+            <button className="content-post-reply">Post Reply</button>
+          </form>
         </div>
       </div>
       <div className="comment__replies">

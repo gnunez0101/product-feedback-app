@@ -1,5 +1,5 @@
 import './SuggestionsList.css'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useDatabase from '../hooks/useDatabase'
 import NoFeedback     from './NoFeedback'
 import SuggestionItem from './SuggestionItem'
@@ -52,7 +52,8 @@ export default function SuggestionsList({listItems} : {listItems: typeListItems[
     }
   }
 
-  function handleUpvotes(id: number) {
+  function handleUpvotes(e: React.MouseEvent<HTMLDivElement>, id: number) {
+    e.stopPropagation()
     dispatch({ type: "upvote", id: id})
   }
 
@@ -71,8 +72,8 @@ export default function SuggestionsList({listItems} : {listItems: typeListItems[
               <div className="name">Sort by :</div>
               <div className={`selected ${showSort ? "open" : ""}`}>{sortOptions[selected].text}</div>
               <div className={`icon ${showSort || !numSuggestions ? "open" : ""}`}></div>
-              <div className='suggestions-list__header--sort-list'>
-                { showSort && <SortList options={sortOptions} handleSortList={handleSortList} /> }
+              <div className={`suggestions-list__header--sort-list ${showSort ? "show" : ""}`}>
+                <SortList options={sortOptions} handleSortList={handleSortList} />
               </div>
             </div>
           </div>

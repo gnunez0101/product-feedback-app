@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Reply.css'
 
 export default function Reply({ reply, setHeightContent }: { reply: typeReply, setHeightContent: any }) {
+  const [showReply, setShowReply] = useState(false)
   const contentRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
@@ -9,6 +10,10 @@ export default function Reply({ reply, setHeightContent }: { reply: typeReply, s
       setHeightContent(contentRef.current.getBoundingClientRect().height + 32 + 17 + 20)
     }
   }, [])
+
+  function handleReply() {
+    setShowReply(!showReply)
+  }
   
   return (
     <div className="reply">
@@ -26,12 +31,20 @@ export default function Reply({ reply, setHeightContent }: { reply: typeReply, s
                 {`@${reply.user.username}`}
               </div>
             </div>
-            <div className="reply__content--reply">Reply</div>
+            <div className="reply__content--reply"
+              onClick={handleReply}
+            >Reply</div>
           </div>
           <div className="reply__content--content">
             <span className="replyingto">{reply.replyingTo}</span>
             <span className="content" ref={contentRef}>{reply.content}</span>
           </div>
+          <form className={`reply__content--content-post ${showReply ? "show" : ""}`}>
+            <textarea className="content-input"
+              placeholder='Type your reply here'
+            />
+            <button className="content-post-reply">Post Reply</button>
+          </form>
         </div>
       </div>
     </div>

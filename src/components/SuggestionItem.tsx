@@ -2,7 +2,8 @@ import './SuggestionItem.css'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SuggestionItem({ item, handleUpvotes }: { item: typeListItems; handleUpvotes: any; }) {
+export default function SuggestionItem({ item, handleUpvotes }
+  : { item: typeListItems, handleUpvotes(e: React.MouseEvent<HTMLDivElement>, id: number): any; }) {
   const [upvotes, setUpvotes] = useState(item.upvotes);
   const numComments = item.comments?.length || 0;
   const navigate = useNavigate();
@@ -15,8 +16,8 @@ export default function SuggestionItem({ item, handleUpvotes }: { item: typeList
         >
           <div className="left">
             <div className="votes"
-              onClick={() => {
-                handleUpvotes(item.id);
+              onClick={(e) => {
+                handleUpvotes(e, item.id);
                 setUpvotes(upvotes + 1);
               }}
             >

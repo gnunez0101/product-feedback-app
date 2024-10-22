@@ -101,7 +101,11 @@
             .suggestions-list__header--sort-list {
               position: absolute;
               top: 62px;
-              display: flex;
+              display: none;
+              transform-origin: top;
+              transform: scaleY(0);
+              transition: transform 0.5s ease,
+                display 0.2s ease allow-discrete;
               flex-direction: column;
               gap: 1px;
               background-color: color-mix(in oklab, var(--text-primary) 15%, white);
@@ -109,6 +113,16 @@
               width: 255px;
               overflow: hidden;
               box-shadow: 0 10px 40px -7px color-mix(in oklab, var(--Very-Dark-Blue) 35%, transparent);
+
+              &.show {
+                display: flex;
+                transform: scaleY(1);
+                transition: transform 0.2s ease-in-out;
+
+                @starting-style {
+                  transform: scaleY(0);
+                }
+              }
               
               .menu-item {
                 display: flex;

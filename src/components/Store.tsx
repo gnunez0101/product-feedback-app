@@ -49,6 +49,11 @@ export const StoreProvider = ( props: StoreProps ) => {
   )
 }
 
+type typeAction = {
+  type: 'upvote' | 'post-comment',
+  id: number
+}
+
 // ===============================================================================================================================
 function dataReducer(draft: typeData, action: typeAction): typeData {
 
@@ -58,6 +63,10 @@ function dataReducer(draft: typeData, action: typeAction): typeData {
       const index = draft.productRequests.findIndex(item => item.id === action.id)
       draft.productRequests[index].upvotes++
       localStorage.setItem("pfb_data", JSON.stringify(draft))
+      return draft
+    }
+
+    case 'post-comment' : {
       return draft
     }
 

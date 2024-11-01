@@ -63,8 +63,4 @@ type typeDialogs = [
   callBack: ((param: any) => void) | undefined
 ] | undefined
 
-type typeAction = {
-  type: 'upvote',
-  id: number
-}
 // ==================================================================================================================

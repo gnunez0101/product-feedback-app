@@ -1,9 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
 import './Reply.css'
+import { FormEvent, useEffect, useRef, useState } from 'react';
+import useDatabase from '../hooks/useDatabase';
 
-export default function Reply({ reply, setHeightContent }: { reply: typeReply, setHeightContent: any }) {
+export default function Reply({ reply, setHeightContent, handleReplyReply }: { reply: typeReply, setHeightContent: any, handleReplyReply: any }) {
   const [showReply, setShowReply] = useState(false)
   const contentRef = useRef<HTMLSpanElement>(null)
+  const [replyText, setReplyText] = useState("")
+  const { database } = useDatabase()
 
   useEffect(() => {
     if (contentRef.current) {
@@ -13,6 +16,26 @@ export default function Reply({ reply, setHeightContent }: { reply: typeReply, s
 
   function handleReply() {
     setShowReply(!showReply)
+  }
+
+  function handleChangeReply(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setReplyText(e.target.value)
+  }
+  
+  function handleSubmitReply(e: FormEvent) {
+    e.preventDefault()
+    const _reply = {
+      content: replyText,
+      replyingTo: reply.user.username,
+      user: {
+        image:    database.currentUser.image,
+        name:     database.currentUser.name,
+        username: database.currentUser.username
+      }
+    }
+    handleReplyReply(_reply)
+    setReplyText("")
+    handleReply()
   }
   
   return (
@@ -39,9 +62,15 @@ export default function Reply({ reply, setHeightContent }: { reply: typeReply, s
             <span className="replyingto">{reply.replyingTo}</span>
             <span className="content" ref={contentRef}>{reply.content}</span>
           </div>
-          <form className={`reply__content--content-post ${showReply ? "show" : ""}`}>
+          <form className={`reply__content--content-post ${showReply ? "show" : ""}`}
+            onSubmit={handleSubmitReply}
+          >
             <textarea className="content-input"
-              placeholder='Type your reply here'
+              name='add-reply-reply' id="add-reply-reply"
+              placeholder = 'Type your reply here'
+              onChange    = {handleChangeReply}
+              maxLength   = {250}
+              value       = {replyText}
             />
             <button className="content-post-reply">Post Reply</button>
           </form>

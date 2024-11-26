@@ -1,5 +1,5 @@
 import "./types"
-import { createContext, useState } from "react";
+import { act, createContext, useState } from "react";
 import { useImmerReducer } from "use-immer"
 import data from '../data.json'
 
@@ -49,9 +49,17 @@ export const StoreProvider = ( props: StoreProps ) => {
   )
 }
 
-type typeAction = {
-  type: 'upvote' | 'post-comment',
+type typeAction = typeActionUpVote | typeActionPostComment
+
+type typeActionUpVote = {
+  type: 'upvote',
   id: number
+}
+
+type typeActionPostComment = {
+  type: 'post-comment',
+  id: number,
+  item: typeComment
 }
 
 // ===============================================================================================================================
@@ -67,11 +75,15 @@ function dataReducer(draft: typeData, action: typeAction): typeData {
     }
 
     case 'post-comment' : {
+      const index = draft.productRequests.findIndex(item => item.id === action.id)
+      if (typeof draft.productRequests[index].comments === 'undefined') draft.productRequests[index] = {...draft.productRequests[index], comments: []}
+      draft.productRequests[index].comments!.push(action.item)
+      localStorage.setItem("pfb_data", JSON.stringify(draft))
       return draft
     }
 
     default: {
-      throw Error('Unknown action: ' + action.type);
+      throw Error('Unknown action: ' + 'action.type');
     }
   }
 }
